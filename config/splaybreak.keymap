@@ -1,0 +1,118 @@
+#include "keys_de.h"
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
+
+&mt {
+    quick-tap-ms = <100>;
+    flavor = "tap-preferred";
+    tapping-term-ms = <250>;
+};
+
+&lt { tapping-term-ms = <240>; };
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+
+        ae {
+            bindings = <&kp DE_A_UMLAUT>;
+            key-positions = <11 2>;
+        };
+
+        ue {
+            bindings = <&kp DE_U_UMLAUT>;
+            key-positions = <2 6>;
+        };
+
+        oe {
+            bindings = <&kp DE_O_UMLAUT>;
+            key-positions = <2 8>;
+        };
+
+        adjust {
+            bindings = <&mo 3>;
+            key-positions = <32 35>;
+        };
+
+        sz {
+            bindings = <&kp DE_ESZETT>;
+            key-positions = <12 5>;
+        };
+    };
+
+    behaviors {
+        hrm: hrm {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HRM";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            flavor = "tap-preferred";
+            quick-tap-ms = <150>;
+        };
+
+        shrm: shrm {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SHRM";
+            bindings = <&sk>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            quick-tap-ms = <100>;
+            flavor = "tap-preferred";
+        };
+
+        mto: mto {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MTO";
+            bindings = <&kp>, <&to>;
+
+            #binding-cells = <2>;
+            quick-tap-ms = <100>;
+            tapping-term-ms = <300>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        base_layer {
+            bindings = <
+                      &kp DE_Q         &kp DE_W         &kp DE_E  &kp DE_R   &kp DE_T    &kp DE_Z                     &kp DE_U     &kp DE_I                     &kp DE_O                &kp DE_P
+&mt LEFT_CONTROL ESC  &shrm LGUI DE_A  &shrm LALT DE_S  &kp DE_D  &kp DE_F   &kp DE_G    &kp DE_H                     &kp DE_J     &kp DE_K                     &kp DE_L                &kp DE_PLUS   &kp BACKSPACE
+                      &kp DE_Y         &kp DE_X         &kp DE_C  &kp DE_V   &kp DE_B    &kp DE_N                     &kp DE_M     &mt DE_EXCLAMATION DE_COMMA  &mt DE_QUESTION DE_DOT  &kp DE_MINUS
+                                                                  &lt 1 TAB  &kp LSHIFT  &hrm LS(LC(LEFT_ALT)) SPACE  &lt 2 ENTER
+            >;
+        };
+
+        extnum_layer {
+            bindings = <
+                  &kp N1    &kp N2    &kp N3      &kp N4     &kp N5         &kp N6           &kp N7        &kp N8        &kp N9           &kp N0
+&sk LEFT_CONTROL  &sk LGUI  &sk LALT  &sk LCTRL   &sk LSHFT  &kp PAGE_UP    &kp LEFT         &kp DOWN      &kp UP        &kp RIGHT_ARROW  &kp DE_PLUS   &trans
+                  &kp HOME  &kp END   &kp DELETE  &kp TAB    &kp PAGE_DOWN  &kp DE_ASTERISK  &kp DE_SLASH  &kp DE_COMMA  &kp DE_PERIOD    &kp DE_MINUS
+                                                  &trans     &trans         &kp SPACE        &kp ENTER
+            >;
+        };
+
+        sym_layer {
+            bindings = <
+           &kp DE_AT    &kp DE_CARET  &kp DE_EURO  &kp DE_DOLLAR         &kp DE_PERCENT       &kp DE_AMPS      &kp DE_RPAR  &kp DE_RBRC   &kp DE_RBKT       &kp DE_ACUTE
+&sk LCTRL  &sk LGUI     &sk LALT      &sk LCTRL    &sk LSHFT             &kp DE_SINGLE_QUOTE  &kp DE_EQUAL     &kp DE_LPAR  &kp DE_LBRC   &kp DE_LBKT       &kp DE_HASH   &trans
+           &kp DE_PIPE  &kp DE_LT     &kp DE_GT    &kp DE_DOUBLE_QUOTES  &kp DE_GRAVE         &kp DE_ASTERISK  &kp DE_FSLH  &kp DE_TILDE  &kp DE_BACKSLASH  &kp DE_DEG
+                                                   &kp TAB               &trans               &trans           &trans
+            >;
+        };
+
+        adjust_layer {
+            bindings = <
+        &bt BT_CLR    &out OUT_TOG  &trans        &trans        &trans        &trans  &kp F9  &kp F10  &kp F11  &kp F12
+&trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &trans  &kp F5  &kp F6   &kp F7   &kp F8   &trans
+        &trans        &trans        &trans        &trans        &trans        &trans  &kp F1  &kp F2   &kp F3   &kp F4
+                                                  &trans        &trans        &trans  &trans
+            >;
+        };
+    };
+};
