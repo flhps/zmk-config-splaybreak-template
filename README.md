@@ -2,6 +2,10 @@
 
 You can find the keyboard files [here](https://github.com/flhps/splaybreak-keyboard).
 
+## Layout Language
+
+This comes pre-loaded with my personal long-term layout. Out of habit I configured it to output keycodes for a German keyboard layout. If you want to change the output language to the default American English, remove the `config/keys_de.h` file and remove its import at the top of `config/splaybreak.keymap`. Then replace the keycodes to ones without the `DE_` prefix. You can do that last step with the recommended setup below.
+
 ## Recommended Setup
 
 1. Create your own repository based on this template.
